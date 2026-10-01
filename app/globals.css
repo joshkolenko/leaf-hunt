@@ -41,8 +41,8 @@ header h1 em{font-style:normal;color:var(--maple)}
 .lede strong{color:var(--ink);font-weight:600}
 
 .regions{display:flex;flex-wrap:wrap;gap:8px}
-.region-tab{font:600 14px var(--body);letter-spacing:.02em;color:var(--muted);background:var(--sheet);border:1px solid var(--rule);border-radius:999px;padding:8px 18px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
-.region-tab[aria-pressed="true"]{background:var(--maple);color:#fff;border-color:var(--maple)}
+.region-tab{display:inline-block;font:600 14px var(--body);letter-spacing:.02em;color:var(--muted);background:var(--sheet);border:1px solid var(--rule);border-radius:999px;padding:8px 18px;text-decoration:none;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.region-tab[aria-current="page"]{background:var(--maple);color:#fff;border-color:var(--maple)}
 .region-tab:focus-visible{outline:2px solid var(--maple);outline-offset:2px}
 .tally{
   background:linear-gradient(160deg,var(--sheet),var(--paper));
