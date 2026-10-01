@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Figtree, Gloock, IBM_Plex_Mono } from "next/font/google";
+import { Figtree, Gloock } from "next/font/google";
 import "./globals.css";
 
 const gloock = Gloock({
@@ -13,13 +13,6 @@ const figtree = Figtree({
   subsets: ["latin"],
 });
 
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-mono",
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: "Grand Rapids Leaf Hunt",
   description:
@@ -28,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${gloock.variable} ${figtree.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${gloock.variable} ${figtree.variable}`}>
       <body>{children}</body>
     </html>
   );
