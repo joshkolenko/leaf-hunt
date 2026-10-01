@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Leaf Hunt",
-  description: "A scavenger hunt for tracking down real leaves outdoors.",
+  title: "Leaf Hunt: Grand Rapids",
+  description: "A scavenger hunt for tracking down real leaves at parks and trails around Grand Rapids, Michigan.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

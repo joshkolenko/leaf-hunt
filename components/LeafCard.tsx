@@ -76,6 +76,10 @@ export function LeafCard({
           <span className="text-sm italic text-zinc-500 dark:text-zinc-400">
             {leaf.scientificName}
           </span>
+          <p className="mt-1 flex items-start gap-1 text-sm text-zinc-600 dark:text-zinc-400">
+            <span aria-hidden>📍</span>
+            <span>{leaf.whereToFind}</span>
+          </p>
         </div>
         <span className="text-zinc-400">{expanded ? "−" : "+"}</span>
       </button>

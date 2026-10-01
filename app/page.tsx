@@ -46,11 +46,11 @@ export default function Home() {
       <main className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-6">
         <header className="mb-8 text-center">
           <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-            🍂 Leaf Hunt
+            🍂 Leaf Hunt: Grand Rapids
           </h1>
           <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-            Head outside and track down every leaf on the list. Tap a card for hints, then
-            mark it found.
+            Track down every leaf on the list at parks and trails around Grand Rapids,
+            Michigan. Tap a card for where to look, hints, then mark it found.
           </p>
         </header>
 
