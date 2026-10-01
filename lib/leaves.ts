@@ -1,155 +1,226 @@
-export type Rarity = "common" | "uncommon" | "rare";
+export type LeafShape =
+  | "maple"
+  | "redmaple"
+  | "silver"
+  | "oakb"
+  | "oakr"
+  | "bur"
+  | "oval"
+  | "hick"
+  | "walnut"
+  | "mitten"
+  | "tulip"
+  | "round"
+  | "lance"
+  | "heart"
+  | "tri"
+  | "syc"
+  | "fan"
+  | "sumac"
+  | "birch";
 
-export interface LeafTarget {
+export interface Leaf {
   id: string;
-  commonName: string;
-  scientificName: string;
-  color: string;
-  rarity: Rarity;
-  whereToFind: string;
-  hint: string;
-  funFact: string;
+  name: string;
+  latin: string;
+  shape: LeafShape;
+  pts: 1 | 2 | 3;
+  colors: [string, string, string];
+  spot: string;
+  where: string;
 }
 
-export const RARITY_POINTS: Record<Rarity, number> = {
-  common: 10,
-  uncommon: 20,
-  rare: 40,
-};
-
-export const LEAVES: LeafTarget[] = [
+export const LEAVES: Leaf[] = [
   {
-    id: "white-oak",
-    commonName: "White Oak",
-    scientificName: "Quercus alba",
-    color: "#8a5a2b",
-    rarity: "common",
-    whereToFind: "John Ball Park and the hardwood stands at Aman Park",
-    hint: "Rounded (not pointy) lobes, pale underside. Look up in mature shade trees.",
-    funFact: "A healthy white oak can live for 300+ years, so the one you're looking at may predate the city.",
+    id: "sugar",
+    name: "Sugar maple",
+    latin: "Acer saccharum",
+    shape: "maple",
+    pts: 1,
+    colors: ["#E8A317", "#E2591B", "#C0262D"],
+    spot: "Five lobes with smooth, U-shaped notches between them and few teeth. The Michigan postcard tree.",
+    where: "Everywhere in the beech-maple woods: Blandford, Aman Park, Grand Ravines.",
   },
   {
-    id: "sugar-maple",
-    commonName: "Sugar Maple",
-    scientificName: "Acer saccharum",
-    color: "#d9742b",
-    rarity: "common",
-    whereToFind: "Aman Park and Provin Trails Nature Area, both known for beech-maple forest",
-    hint: "Classic five-pointed star with smooth, U-shaped notches between the points.",
-    funFact: "West Michigan's maple syrup comes from trees just like this one, tapped every late winter.",
+    id: "red",
+    name: "Red maple",
+    latin: "Acer rubrum",
+    shape: "redmaple",
+    pts: 1,
+    colors: ["#D4231E", "#9E1B32", "#E8A317"],
+    spot: "Three main lobes with sharp V-shaped notches and toothy edges. Red stems. One of the first trees to turn.",
+    where: "Wet edges and city streets. Millennium Park ponds, neighborhood boulevards.",
   },
   {
-    id: "red-maple",
-    commonName: "Red Maple",
-    scientificName: "Acer rubrum",
-    color: "#b3432b",
-    rarity: "common",
-    whereToFind: "Wet, low ground at Millennium Park and along the Riverside Park floodplain",
-    hint: "Three main points with sharp, V-shaped notches; often has red leaf stalks even in summer.",
-    funFact: "Red maple is one of the first trees to color up in fall around Grand Rapids, often by mid-September.",
+    id: "silver",
+    name: "Silver maple",
+    latin: "Acer saccharinum",
+    shape: "silver",
+    pts: 1,
+    colors: ["#D9C25A", "#B9A55A", "#C9CCC0"],
+    spot: "Five very deep, skinny lobes cut nearly to the middle. Flip it over: the underside is silvery white.",
+    where: "River floodplains. Johnson Park and the Grand River banks are full of them.",
   },
   {
-    id: "american-beech",
-    commonName: "American Beech",
-    scientificName: "Fagus grandifolia",
-    color: "#a6b24a",
-    rarity: "uncommon",
-    whereToFind: "The old-growth beech-maple woods at Aman Park",
-    hint: "Oval with sharp, evenly spaced teeth along the edge and straight parallel veins.",
-    funFact: "Young beech trees hold onto their pale, papery dead leaves all winter, a trait called marcescence.",
+    id: "redoak",
+    name: "Northern red oak",
+    latin: "Quercus rubra",
+    shape: "oakb",
+    pts: 1,
+    colors: ["#8E2A1E", "#A0522D", "#6B3E26"],
+    spot: "Pointed lobes, each ending in a tiny bristle tip. Turns russet late and holds on.",
+    where: "Upland woods and older parks. Calvin Ecosystem Preserve, Seidman Park, Heritage Hill streets.",
   },
   {
-    id: "shagbark-hickory",
-    commonName: "Shagbark Hickory",
-    scientificName: "Carya ovata",
-    color: "#cf7a1f",
-    rarity: "uncommon",
-    whereToFind: "Pickerel Lake Nature Preserve and Lamberton Lake Natural Area in Kent County",
-    hint: "Compound leaf with 5 large leaflets; the tree's shaggy, peeling bark gives it away even from a distance.",
-    funFact: "Its bark looks like it's falling apart, but shagbark hickory wood is actually one of the toughest around.",
+    id: "whiteoak",
+    name: "White oak",
+    latin: "Quercus alba",
+    shape: "oakr",
+    pts: 2,
+    colors: ["#8B3A4A", "#7A4B3A", "#B0754A"],
+    spot: "Rounded, finger-like lobes with no bristles. Turns a burgundy-purple you won't mistake.",
+    where: "Dry oak-hickory ground. Calvin Ecosystem Preserve, Seidman Park, Millennium Park uplands.",
   },
   {
-    id: "river-birch",
-    commonName: "River Birch",
-    scientificName: "Betula nigra",
-    color: "#c9a227",
-    rarity: "uncommon",
-    whereToFind: "Along the Grand River at Riverside Park and near the John Ball Zoo riverbank",
-    hint: "Small, diamond-shaped leaf with double-toothed edges; find it growing near water with curling, salmon-colored bark.",
-    funFact: "Unlike most birches, river birch tolerates wet soil well, which is why it lines so much of the Grand River.",
+    id: "bur",
+    name: "Bur oak",
+    latin: "Quercus macrocarpa",
+    shape: "bur",
+    pts: 2,
+    colors: ["#B58A3C", "#8A6A3A", "#6E5A3A"],
+    spot: "Wide at the top, pinched in the middle like a fiddle, with a deep 'waist'. Acorns have fringed, shaggy caps.",
+    where: "Open parkland and savanna remnants. Riverside Park, Millennium Park, older cemeteries.",
   },
   {
-    id: "eastern-cottonwood",
-    commonName: "Eastern Cottonwood",
-    scientificName: "Populus deltoides",
-    color: "#6b8e3d",
-    rarity: "common",
-    whereToFind: "The Grand River Greenway and open floodplain areas of Riverside Park",
-    hint: "Triangular leaf with coarse, rounded teeth; listen for the rustling, almost papery sound in the wind.",
-    funFact: "Cottonwoods grow fast along rivers and can reach well over 100 feet, towering over the Grand River trails.",
+    id: "beech",
+    name: "American beech",
+    latin: "Fagus grandifolia",
+    shape: "oval",
+    pts: 1,
+    colors: ["#D9A441", "#C38E3A", "#E7D3A3"],
+    spot: "Oval with neat parallel veins, each ending in a small tooth. Smooth grey bark. Young trees keep papery tan leaves all winter.",
+    where: "Shady ravines. Aman Park, Grand Ravines and Blandford are classic beech-maple forest.",
   },
   {
-    id: "black-walnut",
-    commonName: "Black Walnut",
-    scientificName: "Juglans nigra",
-    color: "#5f4530",
-    rarity: "common",
-    whereToFind: "John Ball Park and the mature street trees of the Heritage Hill neighborhood",
-    hint: "Compound leaf with many narrow leaflets; look (or smell) for round green husks with walnuts inside, littering the ground.",
-    funFact: "Black walnut roots release a chemical called juglone that keeps many other plants from growing nearby.",
+    id: "hickory",
+    name: "Shagbark hickory",
+    latin: "Carya ovata",
+    shape: "hick",
+    pts: 2,
+    colors: ["#E0B21E", "#C9A227", "#9C7A2E"],
+    spot: "Compound leaf, usually five leaflets with the top three biggest. Check the bark: long strips peeling away like shaggy plates.",
+    where: "Oak-hickory woods. Calvin Ecosystem Preserve, Seidman Park, Pigeon Creek Park.",
   },
   {
-    id: "american-elm",
-    commonName: "American Elm",
-    scientificName: "Ulmus americana",
-    color: "#6f8f49",
-    rarity: "common",
-    whereToFind: "Tree-lined streets around East Grand Rapids and Reeds Lake",
-    hint: "Lopsided leaf base where it meets the stem, with sharp, double-toothed edges.",
-    funFact: "Dutch elm disease wiped out most American elms last century, so surviving street elms are local treasures.",
+    id: "walnut",
+    name: "Black walnut",
+    latin: "Juglans nigra",
+    shape: "walnut",
+    pts: 1,
+    colors: ["#D7C44A", "#B9A64A", "#8A8A3A"],
+    spot: "Long compound leaf with 15-23 narrow leaflets, often missing the end one. Green tennis-ball nuts on the ground. One of the first to drop.",
+    where: "River bottoms and fence lines. Johnson Park, Kent Trails along the river.",
   },
   {
     id: "sassafras",
-    commonName: "Sassafras",
-    scientificName: "Sassafras albidum",
-    color: "#e0b43c",
-    rarity: "uncommon",
-    whereToFind: "Woodland edges at Aman Park and Johnson Park",
-    hint: "Shapeshifter: the same tree can have oval, mitten, and three-lobed leaves all at once.",
-    funFact: "Crushed sassafras leaves smell like root beer, the plant's traditional flavoring source.",
+    name: "Sassafras",
+    latin: "Sassafras albidum",
+    shape: "mitten",
+    pts: 2,
+    colors: ["#E35A1E", "#D97A1E", "#C0262D"],
+    spot: "Three leaf shapes on one tree: plain oval, a mitten, and a three-fingered glove. Crush a leaf; it smells like root beer.",
+    where: "Sunny forest edges and sandy soil. Seidman Park, Millennium Park trails, Grand Ravines edges.",
   },
   {
-    id: "staghorn-sumac",
-    commonName: "Staghorn Sumac",
-    scientificName: "Rhus typhina",
-    color: "#b3432b",
-    rarity: "common",
-    whereToFind: "Sunny trail edges along the Paul Henry-Thornapple Trail and Millennium Park",
-    hint: "Long compound leaf with many narrow, toothed leaflets; look for fuzzy, antler-like red stems and cone-shaped fruit clusters.",
-    funFact: "Staghorn sumac turns some of the most vivid red in the fall of any plant in West Michigan.",
+    id: "tulip",
+    name: "Tulip tree",
+    latin: "Liriodendron tulipifera",
+    shape: "tulip",
+    pts: 3,
+    colors: ["#F2C94C", "#E5B437", "#C9A227"],
+    spot: "Four lobes with a squared-off, notched top, like a tulip or a cat's face. Turns clear butter-yellow.",
+    where: "Native just south of here, so mostly planted. Meijer Gardens and older neighborhoods like Heritage Hill and East Grand Rapids.",
   },
   {
-    id: "quaking-aspen",
-    commonName: "Quaking Aspen",
-    scientificName: "Populus tremuloides",
-    color: "#d4c13a",
-    rarity: "rare",
-    whereToFind: "Open, sandy clearings at Pickerel Lake Nature Preserve",
-    hint: "Small, round leaf that flutters constantly, even in the lightest breeze, thanks to its flattened stalk.",
-    funFact: "An aspen grove is often a single organism, with every tree sharing one underground root system.",
+    id: "aspen",
+    name: "Quaking aspen",
+    latin: "Populus tremuloides",
+    shape: "round",
+    pts: 2,
+    colors: ["#F2C94C", "#E5B437", "#D9A441"],
+    spot: "Nearly round with a sharp tip and fine teeth. The stem is flat, so leaves flutter in the slightest breeze.",
+    where: "Young, sunny woods and old fields. Millennium Park, Pigeon Creek Park.",
+  },
+  {
+    id: "cherry",
+    name: "Black cherry",
+    latin: "Prunus serotina",
+    shape: "lance",
+    pts: 1,
+    colors: ["#E0A030", "#D45A2A", "#B8402A"],
+    spot: "Long, narrow, glossy leaf with tiny inward-curving teeth. Look for a fuzzy rusty line along the midrib underneath. Dark 'burnt potato chip' bark.",
+    where: "Woods edges everywhere. Blandford, Kent Trails, Johnson Park.",
+  },
+  {
+    id: "basswood",
+    name: "Basswood",
+    latin: "Tilia americana",
+    shape: "heart",
+    pts: 1,
+    colors: ["#D9C25A", "#C9A75A", "#A88A4A"],
+    spot: "Big lopsided heart, wider on one side at the base, with saw teeth. Often bigger than your hand.",
+    where: "Rich, moist woods. Blandford, Aman Park, Grand Ravines.",
+  },
+  {
+    id: "cottonwood",
+    name: "Eastern cottonwood",
+    latin: "Populus deltoides",
+    shape: "tri",
+    pts: 1,
+    colors: ["#F0D04A", "#D9B83A", "#B9A04A"],
+    spot: "Triangular, like the Greek letter delta, with coarse curved teeth and a flat stem. Huge trees by water.",
+    where: "Riverbanks and pond edges. Johnson Park, Millennium Park, Kent Trails along the Grand.",
+  },
+  {
+    id: "sycamore",
+    name: "American sycamore",
+    latin: "Platanus occidentalis",
+    shape: "syc",
+    pts: 2,
+    colors: ["#C9A75A", "#A88A4A", "#8A6A3A"],
+    spot: "Big maple-like leaf, but the stem's base is hollow and caps a bud. Bark peels off in camo patches over white.",
+    where: "Right along the Grand River. Johnson Park, Riverside Park, downtown riverwalk.",
   },
   {
     id: "ginkgo",
-    commonName: "Ginkgo",
-    scientificName: "Ginkgo biloba",
-    color: "#cfa72b",
-    rarity: "rare",
-    whereToFind: "Planted as a street and park tree in downtown Grand Rapids and Eastown",
-    hint: "Fan-shaped with a notch at the tip; no other tree in the city has a leaf shaped quite like it.",
-    funFact: "Ginkgo is a 'living fossil,' virtually unchanged for over 200 million years, though every city one here was planted by hand.",
+    name: "Ginkgo",
+    latin: "Ginkgo biloba",
+    shape: "fan",
+    pts: 3,
+    colors: ["#F5D33A", "#F2C94C", "#E5B437"],
+    spot: "Fan-shaped with a split down the middle and veins that fan out instead of branching. Drops nearly all its leaves in a single day.",
+    where: "A street and campus tree from Asia. Downtown, Heritage Hill, GVSU's Pew campus, Meijer Gardens.",
+  },
+  {
+    id: "sumac",
+    name: "Staghorn sumac",
+    latin: "Rhus typhina",
+    shape: "sumac",
+    pts: 1,
+    colors: ["#D4231E", "#E35A1E", "#9E1B32"],
+    spot: "Long compound leaf of many toothed leaflets. Fuzzy twigs like deer antler velvet and red cone-shaped fruit clusters. Turns scarlet early.",
+    where: "Roadsides and sunny clearings. Millennium Park, Kent Trails, highway edges.",
+  },
+  {
+    id: "birch",
+    name: "Paper birch",
+    latin: "Betula papyrifera",
+    shape: "birch",
+    pts: 2,
+    colors: ["#F2C94C", "#E5B437", "#D9C25A"],
+    spot: "Small, egg-shaped, double-toothed leaf. The giveaway is chalk-white bark that peels in thin sheets.",
+    where: "More of a northern tree, so mostly planted here. Yards, Meijer Gardens, Millennium Park.",
   },
 ];
 
-export function totalPossiblePoints(): number {
-  return LEAVES.reduce((sum, leaf) => sum + RARITY_POINTS[leaf.rarity], 0);
-}
+export const MAX_POINTS = LEAVES.reduce((sum, leaf) => sum + leaf.pts, 0);
