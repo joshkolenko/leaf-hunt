@@ -8,6 +8,7 @@ img{max-width:100%}
   --pumpkin:#CC5B12; --maple:#9E2B22; --gold:#B8860B; --moss:#4B6B3A; --found:#F3DFAE;
   --display:var(--font-display), Georgia, "Times New Roman", serif;
   --body:var(--font-body), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --script:var(--font-script), Georgia, cursive;
   --serif-italic:Georgia, "Times New Roman", serif;
 }
 @media (prefers-color-scheme: dark){:root{
@@ -17,20 +18,30 @@ img{max-width:100%}
 
 body{
   background:
+    repeating-linear-gradient(115deg, rgba(0,0,0,.07) 0 3px, transparent 3px 90px),
+    radial-gradient(1400px 700px at 50% -15%, rgba(255,255,255,.05), transparent 60%),
+    linear-gradient(170deg,#5C3A22,#432A18 55%,#331F12);
+  color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
+  padding-inline:16px;padding-block:28px 56px;
+}
+.wrap{
+  max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:36px;
+  background:
     radial-gradient(1100px 560px at 12% -8%, rgba(204,91,18,.18), transparent 60%),
     radial-gradient(900px 480px at 100% 0%, rgba(184,134,11,.14), transparent 55%),
     var(--paper);
-  color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
-  padding-inline:16px;padding-block:24px 56px;
+  border:1px solid var(--rule);border-radius:28px;
+  padding:clamp(20px,4vw,48px);
+  box-shadow:0 24px 60px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35);
 }
-.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
 h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.1}
 p{margin:0}
 .eyebrow{font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 
-header{display:grid;grid-template-columns:1fr auto;gap:20px 32px;align-items:end}
+header{position:relative;display:grid;grid-template-columns:1fr auto;gap:20px 32px;align-items:end}
+header > div,header > p{position:relative;z-index:1}
 header h1{font-size:clamp(40px,8vw,72px)}
-header h1 em{font-style:normal;color:var(--maple)}
+header h1 em{font-style:normal;font-family:var(--script);font-weight:700;color:var(--maple)}
 @supports (background-clip:text) or (-webkit-background-clip:text){
   header h1 em{
     background:linear-gradient(135deg,var(--pumpkin),var(--maple));
@@ -39,6 +50,16 @@ header h1 em{font-style:normal;color:var(--maple)}
 }
 .lede{grid-column:1/-1;max-width:62ch;color:var(--muted)}
 .lede strong{color:var(--ink);font-weight:600}
+
+.leaf-scatter{position:absolute;inset:-28px -24px auto -24px;height:130px;z-index:0;pointer-events:none;overflow:visible}
+.scatter-leaf{position:absolute;width:40px;height:40px;opacity:.55;filter:drop-shadow(0 3px 4px rgba(46,28,18,.18))}
+.scatter-leaf.s0{top:-22px;left:1%;transform:rotate(-20deg) scale(1.1)}
+.scatter-leaf.s1{top:52px;left:-10px;width:28px;height:28px;transform:rotate(28deg)}
+.scatter-leaf.s2{top:-18px;left:38%;width:26px;height:26px;transform:rotate(16deg)}
+.scatter-leaf.s3{top:60px;left:56%;width:24px;height:24px;transform:rotate(-32deg)}
+.scatter-leaf.s4{top:-26px;right:34%;width:30px;height:30px;transform:rotate(10deg)}
+.scatter-leaf.s5{top:30px;right:-8px;width:30px;height:30px;transform:rotate(-14deg)}
+@media (max-width:640px){.scatter-leaf{opacity:.4}}
 
 .regions{display:flex;flex-wrap:wrap;gap:8px}
 .region-tab{display:inline-block;font:600 14px var(--body);letter-spacing:.02em;color:var(--muted);background:var(--sheet);border:1px solid var(--rule);border-radius:999px;padding:8px 18px;text-decoration:none;cursor:pointer;transition:background .2s,color .2s,border-color .2s}

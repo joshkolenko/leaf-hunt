@@ -76,7 +76,15 @@ function compoundLeaflets(n: number, len: number, w: number): ReactNode[] {
   return children;
 }
 
-export function LeafIcon({ shape, color }: { shape: LeafShape; color: string }) {
+export function LeafIcon({
+  shape,
+  color,
+  className,
+}: {
+  shape: LeafShape;
+  color: string;
+  className?: string;
+}) {
   let inner: ReactNode;
   if (shape === "hick") {
     inner = compoundLeaflets(5, 30, 7);
@@ -103,7 +111,7 @@ export function LeafIcon({ shape, color }: { shape: LeafShape; color: string }) 
     );
   }
   return (
-    <svg viewBox="0 0 100 100" aria-hidden="true" style={{ color }}>
+    <svg viewBox="0 0 100 100" aria-hidden="true" className={className} style={{ color }}>
       {inner}
     </svg>
   );

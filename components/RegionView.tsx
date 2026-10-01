@@ -92,6 +92,11 @@ export function RegionView({ region }: { region: Region }) {
       </nav>
 
       <header>
+        <div className="leaf-scatter" aria-hidden="true">
+          {region.leaves.slice(0, 6).map((leaf, i) => (
+            <LeafIcon key={leaf.id} shape={leaf.shape} color={leaf.colors[0]} className={`scatter-leaf s${i}`} />
+          ))}
+        </div>
         <div>
           <p className="eyebrow">{region.eyebrow}</p>
           <h1>
