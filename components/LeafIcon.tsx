@@ -34,6 +34,8 @@ const LEAF_PATHS: Record<string, string> = {
     "M50 66 C34 60 12 46 10 24 C24 12 40 12 48 18 L50 30 L52 18 C60 12 76 12 90 24 C88 46 66 60 50 66 Z",
   syc:
     "M50 10 L58 26 L74 16 L70 36 L90 40 L74 54 L78 66 L58 64 L50 82 L42 64 L22 66 L26 54 L10 40 L30 36 L26 16 L42 26 Z",
+  elm:
+    "M48 8 C64 6 74 22 72 40 C70 58 60 76 50 88 C42 78 30 62 28 44 C26 26 34 10 48 8 Z",
 };
 
 function compoundLeaflets(n: number, len: number, w: number): ReactNode[] {
@@ -82,6 +84,12 @@ export function LeafIcon({ shape, color }: { shape: LeafShape; color: string }) 
     inner = compoundLeaflets(17, 18, 3.6);
   } else if (shape === "sumac") {
     inner = compoundLeaflets(13, 20, 4);
+  } else if (shape === "boxelder") {
+    inner = compoundLeaflets(3, 34, 10);
+  } else if (shape === "ash") {
+    inner = compoundLeaflets(7, 24, 6);
+  } else if (shape === "cedar") {
+    inner = compoundLeaflets(11, 12, 2.5);
   } else {
     const stemTop = shape === "fan" ? 66 : shape === "tri" ? 82 : 84;
     inner = (

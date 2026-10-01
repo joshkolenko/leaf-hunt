@@ -6,7 +6,7 @@ export interface Spot {
   has: string[];
 }
 
-export const SPOTS: Spot[] = [
+export const GRAND_RAPIDS_SPOTS: Spot[] = [
   {
     name: "Johnson Park",
     rule: "take",
@@ -62,5 +62,36 @@ export const SPOTS: Spot[] = [
     where: "Central Grand Rapids",
     about: "Old street trees in one of the country's largest urban historic districts. Fallen leaves on the sidewalk are fair game.",
     has: ["Ginkgo", "Tulip tree", "Northern red oak", "Red maple"],
+  },
+];
+
+export const EATON_RAPIDS_SPOTS: Spot[] = [
+  {
+    name: "Lincoln Brick Park",
+    rule: "take",
+    where: "The Grand River at the edge of downtown",
+    about: "A former brickyard turned city park along the river, with floodplain woods, a disc golf course, and easy river access. The single best stop for river-loving trees.",
+    has: ["Eastern cottonwood", "Silver maple", "Box elder", "Hackberry"],
+  },
+  {
+    name: "Downtown & the Island City riverwalk",
+    rule: "take",
+    where: "Along the Grand River and old millrace channels through downtown",
+    about: "Eaton Rapids' nickname comes from the channels the river and an old millrace cut through downtown. Street trees and riverbank growth both turn here.",
+    has: ["Silver maple", "American elm", "Black walnut"],
+  },
+  {
+    name: "Farm fencerows and roadsides",
+    rule: "take",
+    where: "The farmland surrounding Eaton Rapids",
+    about: "Most of Eaton County is active farmland, and the fencerows, windbreaks, and roadside edges between fields are where a lot of the area's trees survive.",
+    has: ["Bur oak", "Black walnut", "Staghorn sumac", "Eastern red cedar", "American elm"],
+  },
+  {
+    name: "Woodlots outside town",
+    rule: "look",
+    where: "Scattered hardwood stands in the countryside around Eaton Rapids",
+    about: "Small, privately-held woodlots dot the farmland. Respect property lines and stick to road edges and public access points; a photo is the right way to count these.",
+    has: ["White oak", "Shagbark hickory", "Sugar maple", "Basswood", "Black cherry", "Quaking aspen", "White ash"],
   },
 ];

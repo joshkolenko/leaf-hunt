@@ -3,15 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import { LeafIcon } from "@/components/LeafIcon";
 import { useFoundLeaves } from "@/hooks/useFoundLeaves";
-import { LEAVES, MAX_POINTS } from "@/lib/leaves";
-import { SPOTS } from "@/lib/spots";
+import { usePersistedState } from "@/hooks/usePersistedState";
+import { maxPoints, REGIONS, RegionId } from "@/lib/regions";
 
-const RANKS: [number, string][] = [
+const RANK_FRACTIONS: [number, string][] = [
   [0, "Sapling"],
-  [5, "Leaf Peeper"],
-  [12, "Trail Botanist"],
-  [20, "Grand River Ranger"],
-  [28, "Master of the Canopy"],
+  [0.17, "Leaf Peeper"],
+  [0.4, "Trail Botanist"],
+  [0.67, "Grand River Ranger"],
+  [0.93, "Master of the Canopy"],
 ];
 
 const FILTERS: { id: string; label: string }[] = [
@@ -23,28 +23,55 @@ const FILTERS: { id: string; label: string }[] = [
   { id: "3", label: "Trophy · 3 pts" },
 ];
 
-export default function Home() {
-  const { found, toggle, reset } = useFoundLeaves();
-  const [filter, setFilter] = useState("all");
+function ResetButton({ onConfirm }: { onConfirm: () => void }) {
   const [armed, setArmed] = useState(false);
-  const armTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     return () => {
-      if (armTimeout.current) clearTimeout(armTimeout.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
 
-  const foundCount = Object.keys(found).length;
-  const foundPts = LEAVES.filter((leaf) => found[leaf.id]).reduce((sum, leaf) => sum + leaf.pts, 0);
-
-  let rank = RANKS[0][1];
-  for (const [min, name] of RANKS) {
-    if (foundPts >= min) rank = name;
+  function handleClick() {
+    if (!armed) {
+      setArmed(true);
+      timeoutRef.current = setTimeout(() => setArmed(false), 3000);
+      return;
+    }
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setArmed(false);
+    onConfirm();
   }
-  if (foundCount === LEAVES.length) rank = "Full herbarium. Legend.";
 
-  const visible = LEAVES.filter((leaf) => {
+  return (
+    <button type="button" className="reset" onClick={handleClick}>
+      {armed ? "Tap again to clear all" : "Start over"}
+    </button>
+  );
+}
+
+export default function Home() {
+  const [regionId, setRegionId] = usePersistedState<RegionId>("leaf-hunt-region", REGIONS[0].id);
+  const region = REGIONS.find((r) => r.id === regionId) ?? REGIONS[0];
+
+  const { getFound, toggle, reset } = useFoundLeaves();
+  const found = getFound(region.id);
+  const [filter, setFilter] = useState("all");
+
+  const regionMax = maxPoints(region.leaves);
+  const foundCount = Object.keys(found).length;
+  const foundPts = region.leaves
+    .filter((leaf) => found[leaf.id])
+    .reduce((sum, leaf) => sum + leaf.pts, 0);
+
+  let rank = RANK_FRACTIONS[0][1];
+  for (const [frac, name] of RANK_FRACTIONS) {
+    if (foundPts >= frac * regionMax) rank = name;
+  }
+  if (foundCount === region.leaves.length) rank = "Full herbarium. Legend.";
+
+  const visible = region.leaves.filter((leaf) => {
     const got = Boolean(found[leaf.id]);
     if (filter === "left" && got) return false;
     if (filter === "got" && !got) return false;
@@ -52,42 +79,44 @@ export default function Home() {
     return true;
   });
 
-  function handleReset() {
-    if (!armed) {
-      setArmed(true);
-      armTimeout.current = setTimeout(() => setArmed(false), 3000);
-      return;
-    }
-    if (armTimeout.current) clearTimeout(armTimeout.current);
-    setArmed(false);
-    reset();
-  }
-
   return (
     <div className="wrap">
+      <div className="regions" role="group" aria-label="Choose a region">
+        {REGIONS.map((r) => (
+          <button
+            key={r.id}
+            type="button"
+            className="region-tab"
+            aria-pressed={region.id === r.id}
+            onClick={() => setRegionId(r.id)}
+          >
+            {r.name}
+          </button>
+        ))}
+      </div>
+
       <header>
         <div>
-          <p className="eyebrow">West Michigan · Fall 2026 field card</p>
+          <p className="eyebrow">{region.eyebrow}</p>
           <h1>
-            Grand Rapids <em>Leaf Hunt</em>
+            {region.name} <em>Leaf Hunt</em>
           </h1>
         </div>
         <div className="tally" aria-live="polite">
           <span className="eyebrow">Your herbarium</span>
           <div className="big">
             {foundCount}
-            <small> / {LEAVES.length} leaves</small>
+            <small> / {region.leaves.length} leaves</small>
           </div>
           <div className="bar">
-            <i style={{ width: `${(foundCount / LEAVES.length) * 100}%` }} />
+            <i style={{ width: `${(foundCount / region.leaves.length) * 100}%` }} />
           </div>
           <div className="rank">
-            <b>{foundPts}</b> / {MAX_POINTS} pts · <span>{rank}</span>
+            <b>{foundPts}</b> / {regionMax} pts · <span>{rank}</span>
           </div>
         </div>
         <p className="lede">
-          Nineteen trees that grow around Grand Rapids, from the everywhere-maples to a few
-          genuine trophies. Tap a card when you&apos;ve got the leaf. <strong>Timing:</strong> it&apos;s
+          {region.tagline} Tap a card when you&apos;ve got the leaf. <strong>Timing:</strong> it&apos;s
           early October, so red maples and sumac are turning first; most of the region hits peak
           color in the <strong>third and fourth weeks of October</strong>, and oaks hang on into
           November.
@@ -106,9 +135,7 @@ export default function Home() {
             {f.label}
           </button>
         ))}
-        <button type="button" className="reset" onClick={handleReset}>
-          {armed ? "Tap again to clear all" : "Start over"}
-        </button>
+        <ResetButton key={region.id} onConfirm={() => reset(region.id)} />
       </div>
 
       <div className="grid">
@@ -128,7 +155,7 @@ export default function Home() {
                 type="button"
                 className={`card${got ? " got" : ""}`}
                 aria-pressed={got}
-                onClick={() => toggle(leaf.id)}
+                onClick={() => toggle(region.id, leaf.id)}
               >
                 <LeafIcon shape={leaf.shape} color={leaf.colors[0]} />
                 <div className="nm">
@@ -172,7 +199,7 @@ export default function Home() {
           fallen leaves to press.
         </p>
         <div className="spots">
-          {SPOTS.map((spot) => (
+          {region.spots.map((spot) => (
             <div key={spot.name} className="spot">
               <h3>
                 {spot.name}
@@ -217,17 +244,14 @@ export default function Home() {
           <div>
             <h3>Count it with a photo</h3>
             <p>
-              At Blandford, Meijer Gardens and the preserves, a clear photo of the leaf next to
-              your hand counts as found.
+              At nature preserves and gardens, a clear photo of the leaf next to your hand counts
+              as found.
             </p>
           </div>
         </div>
       </section>
 
-      <footer>
-        Peak-color timing from regional fall forecasts for southwest Lower Michigan. Check park
-        hours before you go; Meijer Gardens charges admission.
-      </footer>
+      <footer>{region.footer}</footer>
     </div>
   );
 }

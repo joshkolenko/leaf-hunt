@@ -6,8 +6,12 @@ export type LeafShape =
   | "oakr"
   | "bur"
   | "oval"
+  | "elm"
   | "hick"
   | "walnut"
+  | "boxelder"
+  | "ash"
+  | "cedar"
   | "mitten"
   | "tulip"
   | "round"
@@ -30,7 +34,7 @@ export interface Leaf {
   where: string;
 }
 
-export const LEAVES: Leaf[] = [
+export const GRAND_RAPIDS_LEAVES: Leaf[] = [
   {
     id: "sugar",
     name: "Sugar maple",
@@ -223,4 +227,175 @@ export const LEAVES: Leaf[] = [
   },
 ];
 
-export const MAX_POINTS = LEAVES.reduce((sum, leaf) => sum + leaf.pts, 0);
+export const EATON_RAPIDS_LEAVES: Leaf[] = [
+  {
+    id: "cottonwood",
+    name: "Eastern cottonwood",
+    latin: "Populus deltoides",
+    shape: "tri",
+    pts: 1,
+    colors: ["#F0D04A", "#D9B83A", "#B9A04A"],
+    spot: "Triangular, like the Greek letter delta, with coarse curved teeth and a flat stem. Huge trees by water.",
+    where: "Lincoln Brick Park and the Grand River floodplain through town.",
+  },
+  {
+    id: "silver",
+    name: "Silver maple",
+    latin: "Acer saccharinum",
+    shape: "silver",
+    pts: 1,
+    colors: ["#D9C25A", "#B9A55A", "#C9CCC0"],
+    spot: "Five very deep, skinny lobes cut nearly to the middle. Flip it over: the underside is silvery white.",
+    where: "Lincoln Brick Park and the riverbank throughout the Island City.",
+  },
+  {
+    id: "boxelder",
+    name: "Box elder",
+    latin: "Acer negundo",
+    shape: "boxelder",
+    pts: 1,
+    colors: ["#D9C25A", "#A8A84A", "#C9CCC0"],
+    spot: "A maple with a compound leaf: 3-5 toothed leaflets instead of one lobed blade. Easy to mistake for poison ivy, but the buds and twigs are opposite.",
+    where: "Fence lines and riverbanks all over town, especially near the Grand River.",
+  },
+  {
+    id: "bur",
+    name: "Bur oak",
+    latin: "Quercus macrocarpa",
+    shape: "bur",
+    pts: 2,
+    colors: ["#B58A3C", "#8A6A3A", "#6E5A3A"],
+    spot: "Wide at the top, pinched in the middle like a fiddle, with a deep 'waist'. Acorns have fringed, shaggy caps.",
+    where: "Old farm field edges and fencerows outside Eaton Rapids, remnants of the area's oak savanna.",
+  },
+  {
+    id: "whiteoak",
+    name: "White oak",
+    latin: "Quercus alba",
+    shape: "oakr",
+    pts: 2,
+    colors: ["#8B3A4A", "#7A4B3A", "#B0754A"],
+    spot: "Rounded, finger-like lobes with no bristles. Turns a burgundy-purple you won't mistake.",
+    where: "The remaining hardwood woodlots in the farmland surrounding town.",
+  },
+  {
+    id: "hickory",
+    name: "Shagbark hickory",
+    latin: "Carya ovata",
+    shape: "hick",
+    pts: 2,
+    colors: ["#E0B21E", "#C9A227", "#9C7A2E"],
+    spot: "Compound leaf, usually five leaflets with the top three biggest. Check the bark: long strips peeling away like shaggy plates.",
+    where: "Mixed woodlots outside town.",
+  },
+  {
+    id: "walnut",
+    name: "Black walnut",
+    latin: "Juglans nigra",
+    shape: "walnut",
+    pts: 1,
+    colors: ["#D7C44A", "#B9A64A", "#8A8A3A"],
+    spot: "Long compound leaf with 15-23 narrow leaflets, often missing the end one. Green tennis-ball nuts on the ground. One of the first to drop.",
+    where: "Farm fencerows and yards all around Eaton Rapids.",
+  },
+  {
+    id: "elm",
+    name: "American elm",
+    latin: "Ulmus americana",
+    shape: "elm",
+    pts: 2,
+    colors: ["#C9A75A", "#A88A4A", "#D9C25A"],
+    spot: "Lopsided leaf base where it meets the stem, with sharp, double-toothed edges.",
+    where: "Old hedgerows and farm lanes outside town, survivors of Dutch elm disease.",
+  },
+  {
+    id: "basswood",
+    name: "Basswood",
+    latin: "Tilia americana",
+    shape: "heart",
+    pts: 1,
+    colors: ["#D9C25A", "#C9A75A", "#A88A4A"],
+    spot: "Big lopsided heart, wider on one side at the base, with saw teeth. Often bigger than your hand.",
+    where: "Moist woodlots along the Grand River corridor.",
+  },
+  {
+    id: "cherry",
+    name: "Black cherry",
+    latin: "Prunus serotina",
+    shape: "lance",
+    pts: 1,
+    colors: ["#E0A030", "#D45A2A", "#B8402A"],
+    spot: "Long, narrow, glossy leaf with tiny inward-curving teeth. Look for a fuzzy rusty line along the midrib underneath. Dark 'burnt potato chip' bark.",
+    where: "Woods edges and fencerows throughout the area.",
+  },
+  {
+    id: "red",
+    name: "Red maple",
+    latin: "Acer rubrum",
+    shape: "redmaple",
+    pts: 1,
+    colors: ["#D4231E", "#9E1B32", "#E8A317"],
+    spot: "Three main lobes with sharp V-shaped notches and toothy edges. Red stems. One of the first trees to turn.",
+    where: "Wet ditches and low ground around town.",
+  },
+  {
+    id: "sugar",
+    name: "Sugar maple",
+    latin: "Acer saccharum",
+    shape: "maple",
+    pts: 1,
+    colors: ["#E8A317", "#E2591B", "#C0262D"],
+    spot: "Five lobes with smooth, U-shaped notches between them and few teeth. The Michigan postcard tree.",
+    where: "The few remaining upland woodlots outside Eaton Rapids.",
+  },
+  {
+    id: "sumac",
+    name: "Staghorn sumac",
+    latin: "Rhus typhina",
+    shape: "sumac",
+    pts: 1,
+    colors: ["#D4231E", "#E35A1E", "#9E1B32"],
+    spot: "Long compound leaf of many toothed leaflets. Fuzzy twigs like deer antler velvet and red cone-shaped fruit clusters. Turns scarlet early.",
+    where: "Roadsides and sunny field edges all around town.",
+  },
+  {
+    id: "aspen",
+    name: "Quaking aspen",
+    latin: "Populus tremuloides",
+    shape: "round",
+    pts: 2,
+    colors: ["#F2C94C", "#E5B437", "#D9A441"],
+    spot: "Nearly round with a sharp tip and fine teeth. The stem is flat, so leaves flutter in the slightest breeze.",
+    where: "Old fields and young woods on the edge of town.",
+  },
+  {
+    id: "cedar",
+    name: "Eastern red cedar",
+    latin: "Juniperus virginiana",
+    shape: "cedar",
+    pts: 2,
+    colors: ["#4B6B3A", "#6B8A52", "#8FA86A"],
+    spot: "Not a true cedar: scaly, evergreen sprays instead of flat leaves. One of the first trees to take over an unmowed pasture.",
+    where: "Old pastures and fencerows, especially on drier ground outside town.",
+  },
+  {
+    id: "hackberry",
+    name: "Hackberry",
+    latin: "Celtis occidentalis",
+    shape: "oval",
+    pts: 3,
+    colors: ["#D9A441", "#C38E3A", "#E7D3A3"],
+    spot: "Lopsided oval with a long point and coarse teeth, somewhat like an elm leaf. Warty, corky bark is the giveaway.",
+    where: "Floodplain woods along the Grand River, easiest to find near Lincoln Brick Park.",
+  },
+  {
+    id: "ash",
+    name: "White ash",
+    latin: "Fraxinus americana",
+    shape: "ash",
+    pts: 3,
+    colors: ["#D9C25A", "#C9A75A", "#E5B437"],
+    spot: "Compound leaf with 5-9 oval leaflets in opposite pairs. The emerald ash borer has killed most mature ash in the area, so a big one is a real find.",
+    where: "Scattered survivors in yards and woodlots around Eaton Rapids.",
+  },
+];
